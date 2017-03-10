@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-cp -R files/* ~/
+rsync -r -u files/ ~/
 source ~/.bashrc
