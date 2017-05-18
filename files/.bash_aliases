@@ -6,3 +6,5 @@ alias cd..='cd ..'
 alias gti='git'
 alias gz='tar czvf'
 alias ugz='tar xzvf'
+alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
+
