@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
+
 Robocopy files/ ~/ -s
-source ~/.bashrc
+mkdir -p ~/.local/bin/
+Robocopy bin/ ~/.local/bin/ -s
+
+echo "close and reopen"

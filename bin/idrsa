@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+TYPE=$1
+
+if [[ ${TYPE} == "" ]]
+then
+  echo "missing parameter usage: idrsa name"
+else
+  cp ~/.ssh/id_rsa_"${TYPE}" ~/.ssh/id_rsa
+  cp ~/.ssh/id_rsa_"${TYPE}".pub ~/.ssh/id_rsa.pub
+fi

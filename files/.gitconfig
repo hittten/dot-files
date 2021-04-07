@@ -12,3 +12,6 @@
     editor = vim
     excludesfile = ~/.gitignore
     autocrlf = input
+[user]
+    name = usuario
+    email = usuario@email.com

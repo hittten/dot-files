@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
+
 rsync -r -u files/ ~/
-
-rm -f ~/.bashrc
-
 rsync -r -u mac_files/ ~/
+mkdir -p ~/.local/bin/
+rsync -r -u bin/ ~/.local/bin/
 
-source ~/.bash_profile
+echo "close and reopen"

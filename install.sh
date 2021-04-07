@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
+
 rsync -r -u files/ ~/
-source ~/.bashrc
+mkdir -p ~/.local/bin/
+rsync -r -u bin/ ~/.local/bin/
+
+echo "close and reopen"
