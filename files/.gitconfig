@@ -15,3 +15,7 @@
 [user]
     name = usuario
     email = usuario@email.com
+[pull]
+    rebase = true
+[init]
+    defaultBranch = main
