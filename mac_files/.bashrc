@@ -5,8 +5,6 @@
 source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 
-GIT_PS1_SHOWDIRTYSTATE=true
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -40,9 +38,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# Human readable colors
-source ~/.bash_colors
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -65,21 +60,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-  host_color=$BRIGHT_GREEN
-
-  if [ "$(whoami)" = "root" ]; then
-    host_color=$BRIGHT_RED
-  fi
-
-  # prompt modules
-  host="\n${BRIGHT_GREEN}┌ ${RESET}\${debian_chroot:+($debian_chroot)}$host_color\u@\h"
-  date="${RESET} \d \t"
-  git="${BRIGHT_YELLOW}\$(__git_ps1)${RESET}"
-  path="${BRIGHT_BLUE}\w${RESET}"
-
-  PS1="${host} ${date} ${memory} ${battery}\n${BRIGHT_GREEN}└${RESET} ${path}${git}\$ "
-
-  unset host_color
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -131,4 +112,8 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
+fi
+
+if [ -f ~/.bash_profile ]; then
+    . ~/.bash_profile
 fi
