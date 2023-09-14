@@ -8,4 +8,5 @@ then
 else
   cp ~/.ssh/$TYPE ~/.ssh/id_rsa
   cp ~/.ssh/$TYPE.pub ~/.ssh/id_rsa.pub
+  ssh-add ~/.ssh/id_rsa
 fi
