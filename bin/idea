@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Detectar el sistema operativo
+OS="$(uname -s)"
+
+# Si el sistema operativo es Darwin (macOS)
+if [ "$OS" = "Darwin" ]; then
+    open -na "IntelliJ IDEA.app" --args "$@"
+# Si el sistema operativo es Linux y estamos usando WSL
+elif [ "$OS" = "Linux" ] && grep -qi microsoft /proc/version; then
+    idea64.exe "$@"
+else
+    echo "Sistema no soportado"
+    exit 1
+fi

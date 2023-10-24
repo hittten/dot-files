@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Check if an argument (profile name) is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <profile_name>"
+    exit 1
+fi
+
+# Read the profile configuration file
+PROFILES_CONFIG="$HOME/.profiles.txt"
+
+# Check if the configuration file exists
+if [ ! -f "$PROFILES_CONFIG" ]; then
+    echo "Profile configuration file does not exist: $PROFILES_CONFIG"
+    exit 1
+fi
+
+# Read the profile name provided as an argument
+PROFILE=$1
+
+# Search for the profile in the configuration file
+PROFILE_FOUND=false
+while read -r LINE; do
+    NAME=$(echo "$LINE" | awk '{print $1}')
+    EMAIL=$(echo "$LINE" | awk '{print $2}')
+    SSH_KEY_PATH=$(echo "$LINE" | awk '{print $3}')
+
+    if [ "$NAME" == "$PROFILE" ]; then
+        PROFILE_FOUND=true
+        break
+    fi
+done < "$PROFILES_CONFIG"
+
+# If the profile is found in the configuration file, change the settings
+if [ "$PROFILE_FOUND" = true ]; then
+    # Change Firebase configuration
+    firebase login:use "$EMAIL"
+    gcloud config set account "$EMAIL"
+
+    # Change Git id_rsa key
+    cp "$SSH_KEY_PATH" ~/.ssh/id_rsa
+    cp "$SSH_KEY_PATH.pub" ~/.ssh/id_rsa.pub
+    ssh-add ~/.ssh/id_rsa
+
+    echo "Profile changed to $PROFILE"
+else
+    echo "Profile not found in the configuration file: $PROFILE"
+    exit 1
+fi
