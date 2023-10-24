@@ -7,7 +7,7 @@ OS="$(uname -s)"
 if [ "$OS" = "Darwin" ]; then
     open -na "IntelliJ IDEA.app" --args "$@"
 # Si el sistema operativo es Linux y estamos usando WSL
-elif [ "$OS" = "Linux" ] && grep -qi microsoft /proc/version; then
+elif [ "$OS" = "Linux" ] && grep -qi WSL /proc/version; then
     idea64.exe "$@"
 else
     echo "Sistema no soportado"
