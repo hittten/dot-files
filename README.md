@@ -22,6 +22,7 @@ alias gti='git'
 alias gz='tar czvf'
 alias ugz='tar xzvf'
 alias update='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
+alias gdeploy='git push origin dev && git co pre && git merge dev && git push origin pre && git co main && git merge pre && git push origin main && git co dev'
 ```
 
 ### Git config
